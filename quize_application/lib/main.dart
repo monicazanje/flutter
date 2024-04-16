@@ -126,6 +126,7 @@ class _HomePageState extends State {
   final TextEditingController _namesTextEditingController =
       TextEditingController();
   final FocusNode _nameFocusNode = FocusNode();
+  
   Scaffold isQuestionScreen() {
     if (HomePage == true) {
       return Scaffold(
@@ -161,7 +162,7 @@ class _HomePageState extends State {
                       height: 5,
                     ),
                     Text(
-                      '       Quize... ',
+                      '       Quiz... ',
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         color: Colors.black,
@@ -259,7 +260,7 @@ class _HomePageState extends State {
       return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "QuizeApp",
+            "QuizApp",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w600,

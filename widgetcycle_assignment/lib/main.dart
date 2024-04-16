@@ -6,7 +6,7 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'WidgetCycle',
       home: WidgetCycle(),
@@ -33,9 +33,7 @@ class _WidgetCycleState extends State {
   }
 
   bool changeScaffold = true;
-
-  @override
-  Widget build(BuildContext context) {
+  Scaffold widgetCycle() {
     if (changeScaffold = true) {
       return Scaffold(
         appBar: AppBar(
@@ -55,25 +53,40 @@ class _WidgetCycleState extends State {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            onUserInput();
             changeScaffold = false;
+            onUserInput();
 
-            deactivate();
-            dispose();
+           
+
+            //deactivate();
+            //dispose(),
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       );
     } else {
-      return Scaffold();
-      print("in build");
-      // deactivate();
-      // dispose();
+      return Scaffold(
+        body: Container(
+          height: 200,
+          width: 200,
+          margin: const EdgeInsets.all(50),
+          child: const Text(
+            "data",
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+      );
     }
   }
 
-  void didUpdateWidget(oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  @override
+  Widget build(BuildContext context) {
+    print("in build");
+    return widgetCycle();
+  }
+
+  void didUpdateWidget(WidgetCycle) {
+    super.didUpdateWidget(widgetCycle());
     print("in update widget");
   }
 

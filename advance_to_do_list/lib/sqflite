@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+//import 'package:sqflite/sqlite_api.dart';
+
+dynamic database;
+
+class Player {
+  final String? name;
+  final int? jerNo;
+  final double? avg;
+
+  Player({required this.name, required this.jerNo, required this.avg});
+
+  Map<String, dynamic> playerMap() {
+    return {
+      'name': name,
+      'jerNo': jerNo,
+      'avg': avg,
+    };
+  }
+
+  @override
+  String toString() {
+    return '{name:$name,jerNo:$jerNo,avg:$avg}';
+  }
+}
+
+Future insertData(Player obj) async {
+  final localDB = await database;
+  localDB.insert(
+    'Player',
+    obj.playerMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
+}
+
+Future<List<Player>> getPlayerData() async {
+  final localDB = await database;
+
+  List<Map<String, dynamic>> playerlist = await localDB.query("Player");
+  return List.generate(playerlist.length, (index) {
+    return Player(
+        name: playerlist[index]['name'],
+        jerNo: playerlist[index]['jerNo'],
+        avg: playerlist[index]['avg']);
+  });
+}
+
+Future<void> deleteplayer(int data) async {
+  final localDB = await database;
+  localDB.delete(
+    'Player',
+    where: 'jerNo=?',
+    whereArgs: [data],
+  );
+}
+
+Future<void> update(Player player) async {
+  final localDB = await database;
+  localDB.update('Player', player.playerMap(),
+      where: 'jerNo=?', whereArgs: [player]);
+}
+
+void main() async {
+  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  database = openDatabase(
+    join(await getDatabasesPath(), "Playerbb.db"),
+    version: 1,
+    onCreate: (db, version) {
+      db.execute('''CREATE TABLE Player(
+          name TEXT,
+          jerNo INTEGER PRIMARY KEY,
+          avg REAL
+        )''');
+    },
+  );
+  Player obj = Player(
+    name: 'rohit',
+    jerNo: 45,
+    avg: 122,
+  );
+  await insertData(obj);
+  //await delete(45);
+  Player obj1 = Player(
+    name: 'virat',
+    jerNo: 18,
+    avg: 152,
+  );
+  await insertData(obj1);
+  //await delete(45);
+  Player obj2 = Player(
+    name: 'dhoni',
+    jerNo: 7,
+    avg: 172,
+  );
+  await insertData(obj2);
+  print(await getPlayerData());
+
+  deleteplayer(45);
+  print(await getPlayerData());
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            body: Container(
+          height: 200,
+          width: 200,
+          color: Colors.purpleAccent,
+        )));
+  }
+}
