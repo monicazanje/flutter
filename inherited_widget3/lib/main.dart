@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:inherited_widget3/login.dart';
 
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    log("in the myapp build");
     return SharedData(
       modelclassobj: ModelClass(),
       child: const MaterialApp(

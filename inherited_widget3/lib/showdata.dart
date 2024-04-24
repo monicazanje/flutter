@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:inherited_widget3/addskill.dart';
 import 'package:inherited_widget3/main.dart';
@@ -11,6 +13,7 @@ class ShowData extends StatefulWidget {
 class _ShowDataState extends State<ShowData> {
   @override
   Widget build(BuildContext context) {
+    log("log in showdata");
     SharedData sharedDataobj = SharedData.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -72,6 +75,7 @@ class _ShowDataState extends State<ShowData> {
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: GestureDetector(
                 onTap: () {
+                  log("log in add button");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
