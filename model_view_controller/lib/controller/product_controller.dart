@@ -9,7 +9,7 @@ class ProductController with ChangeNotifier {
   }
 
   void addfavorite() {
-    productobj!.favorite=true;
+    productobj!.favorite=!productobj!.favorite!;
     notifyListeners();
   }
 
