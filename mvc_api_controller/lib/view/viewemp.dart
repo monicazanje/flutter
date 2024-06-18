@@ -1,8 +1,9 @@
-import 'dart:developer';
-import 'package:api_model/model/empmodel.dart';
+
+import 'package:mvc_api_controller/model/empmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:mvc_api_controller/controller/empcontroller.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 class ViewEmployee extends StatefulWidget {
   const ViewEmployee({super.key});
@@ -35,29 +36,21 @@ class _ViewEmployee extends State {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: employeeData,
+        onPressed: EmpController.employeeData,
         child: const Text("Add"),
       ),
     );
   }
 
-  void employeeData() async {
-    Uri url = Uri.parse("https://dummy.restapiexample.com/api/v1/create");
-    Map<String, String> datamap = {
-      'employee_name': 'monika',
-      'employee_age': "21",
-      'employee_salary': "2000000",
-      'id': "1234567",
-      'profile_image': ""
-    };
-
-    http.Response response = await http.post(url, body: datamap);
-    log(response.body);
-    // var responseData = json.decode(response.body);
-    // //log(responseData);
-    // Employeedata empModel = Employeedata(responseData);
-    // setState(() {
-    //   emplist = empModel.data!;
-    // });
-  }
+  // void employeeData() async {
+  //   Uri url = Uri.parse("https://dummy.restapiexample.com/api/v1/employees");
+  //   http.Response response = await http.get(url);
+  //   //log(response.body);
+  //   var responseData = json.decode(response.body);
+  //   //log(responseData);
+  //   Employeedata empModel = Employeedata(responseData);
+  //   setState(() {
+  //     emplist = empModel.data!;
+  //   });
+  // }
 }
