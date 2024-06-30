@@ -42,9 +42,8 @@ class _HomeState extends State {
     log(responce.body);
     var responsedata=json.decode(responce.body);
     Employee obj=Employee(responsedata);
-    setState(() {
+    setState(() { 
       mapdata=obj.data!;
-  
     });
   }
 }

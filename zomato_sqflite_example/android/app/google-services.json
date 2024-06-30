@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "504879824495",
+    "project_id": "flutter-project-5dcb5",
+    "storage_bucket": "flutter-project-5dcb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504879824495:android:1f0bb8a256f6d778afd79a",
+        "android_client_info": {
+          "package_name": "com.example.zomato_sqflite_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtKhJURAXOy9x0kRebpNPtjYmPMofwHKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 dynamic database;
 
 class Zomato {
@@ -67,33 +68,48 @@ Future<void> updateorderdata(Zomato obj) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  database = openDatabase(
-    join(await getDatabasesPath(), 'zomatoDB.db'),
-    version: 1,
-    onCreate: (db, version) async {
-      await db.execute(
-          '''CREATE TABLE zomato(orderNo INTEGER PRIMARY KEY,custname TEXT,hotelname TEXT,food TEXT,bill REAL)''');
-    },
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
   );
-  Zomato order1 = Zomato(
-      orderNo: 101,
-      custname: 'monica',
-      hotelname: 'shree',
-      food: 'pavBhaji',
-      bill: 550);
-  await insertData(order1);
-  Zomato order2 = Zomato(
-      orderNo: 102,
-      custname: 'shivani',
-      hotelname: 'shree',
-      food: 'vadapav',
-      bill: 70);
-  await insertData(order2);
+  runApp(const MainApp());
 
-  print(await getZomatoData());
+  // database = openDatabase(
+  //   join(await getDatabasesPath(), 'zomatoDB.db'),
+  //   version: 1,
+  //   onCreate: (db, version) async {
+  //     await db.execute(
+  //         '''CREATE TABLE zomato(orderNo INTEGER PRIMARY KEY,custname TEXT,hotelname TEXT,food TEXT,bill REAL)''');
+  //   },
+  // );
+  // Zomato order1 = Zomato(
+  //     orderNo: 101,
+  //     custname: 'monica',
+  //     hotelname: 'shree',
+  //     food: 'pavBhaji',
+  //     bill: 550);
+  // await insertData(order1);
+  // Zomato order2 = Zomato(
+  //     orderNo: 102,
+  //     custname: 'shivani',
+  //     hotelname: 'shree',
+  //     food: 'vadapav',
+  //     bill: 70);
+  // await insertData(order2);
 
-  deleteData(101);
-  //updateorderdata(order1);
-  print(await getZomatoData());
+  // print(await getZomatoData());
+
+  // deleteData(101);
+  // //updateorderdata(order1);
+  // print(await getZomatoData());
+}
+class MainApp extends StatefulWidget{
+  const MainApp({super.key});
+  State createState()=>_MainAppState();
+}
+class _MainAppState extends State{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold();
+  }
+
 }
