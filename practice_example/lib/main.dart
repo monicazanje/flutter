@@ -91,9 +91,25 @@ class _MyappState extends State<Myapp> {
         ),
         child: Text("add"),
       ),
-      bottomNavigationBar: Navigator(,),
+      bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentindex = index;
+            });
+          },
+          indicatorColor: Colors.amber,
+          selectedIndex: currentindex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+          ]),
     );
   }
+
+  int currentindex = 0;
 
   TextEditingController name = TextEditingController();
   TextEditingController date = TextEditingController();
@@ -145,7 +161,6 @@ class _MyappState extends State<Myapp> {
           ),
         );
       },
-      
     );
   }
 }
