@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider_exaple/providerscreen.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_exaple/screen2.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -23,12 +24,13 @@ class _Homestate extends State {
                     child: Text(value.datalist[index].toString()),
                   );
                 },
-              ))
+              )),
+              ElevatedButton(onPressed: (){value.add();}, child: const Text("add"))
             ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              value.add();
+              Navigator.push(context, MaterialPageRoute(builder: (context){return const Screen2();}));
             },
             child: Icon(Icons.add),
           ))),
